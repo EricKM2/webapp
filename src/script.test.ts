@@ -2,6 +2,6 @@ import { isEven } from "./script";
 
 describe("isEven", () => {
     it("should be even", () => {
-        expect(isEven(3)).toBeTruthy();
+        expect(isEven(4)).toBeTruthy();
     });
 });
