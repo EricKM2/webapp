@@ -1,4 +1,6 @@
+
 name: Testing noumérou deuh
+
 on: push
 
 jobs:
@@ -6,25 +8,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Setup environment
         uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Load & Cache Dependencies
         uses: ./.github/actions/cached-deps
+
       - name: Run Linting Rules
         run: npm run lint
+
   Test:
     needs: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Setup environment
         uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Load & Cache Dependencies
         uses: ./.github/actions/cached-deps
-      - name: Print in terminal
+
+      - name: Run Tests
         run: npm run test
-    Build:
+
+  Build:
     needs: Test
     uses: ./.github/workflows/build.yml
